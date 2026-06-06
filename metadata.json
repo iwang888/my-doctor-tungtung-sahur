@@ -1,0 +1,6 @@
+{
+  "name": "mydoctor",
+  "description": "เเพลตฟอร์มบริการทางการแพทย์และการดูแลสุขภาพครบวงจร (MyDoctor Medical Service Platform)",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
