@@ -42,8 +42,28 @@ export default function NutritionSection() {
     const historicalLogs = getStorage<NutritionLog[]>('mydoctor_nutrition_logs', []);
     setLogs(historicalLogs);
 
+    let defaultWeight = 65;
+    let defaultHeight = 170;
+
+    try {
+      const savedProfile = localStorage.getItem('mydoctor_user_profile');
+      if (savedProfile) {
+        const parsed = JSON.parse(savedProfile);
+        if (parsed.weight) {
+          defaultWeight = Number(parsed.weight);
+          setWeight(String(parsed.weight));
+        }
+        if (parsed.height) {
+          defaultHeight = Number(parsed.height);
+          setHeight(String(parsed.height));
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse saved user profile:', e);
+    }
+
     // Initial trigger calculation
-    triggerCalculation(65, 170, 28, 'female', 'moderate');
+    triggerCalculation(defaultWeight, defaultHeight, 28, 'female', 'moderate');
   }, []);
 
   const triggerCalculation = (wValue: number, hValue: number, aValue: number, gValue: 'male' | 'female', actValue: any) => {
